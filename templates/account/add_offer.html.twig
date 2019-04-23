@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h2>Créer une nouvelle offre</h2>
+        <form action="{{ path('account_offer_add') }}" method="POST">
+            <input type="hidden" name="submitted" value="1" />
+            {% if error.title is defined %}<span class="has-error">{{error.title}}{% endif %}
+            <label>Titre*
+                <input type="text" name="title" \>
+            </label>
+
+            {% if error.description is defined %}<span class="has-error">{{error.description}}{% endif %}
+            <label>Description*
+                <input type="text" name="description" \>
+            </label>
+
+            {% if error.quantity is defined %}<span class="has-error">{{error.quantity}}{% endif %}
+            <label>Quantité*
+                <input type="text" name="quantity" \>
+            </label>
+
+            {% if error.addressIs is defined %}<span class="has-error">{{error.addressId}}{% endif %}
+                <select name="addressId">
+                    {% for address in addresses %}
+                        <option value="{{ address.id }}">{{ address.name }}</option>
+                    {% endfor %}
+                </select>
+
+            <label>Tags (un mot / tag)
+                <input type="text" name="tags" placeholder="bois europe palette ..." \>
+            </label>
+
+            <button type="submit">Valider</button>
+        </form>
+    </div>
+{% endblock %}

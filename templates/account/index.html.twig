@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1>Gestion de compte</h1>
+        <h2>Mes informations</h2>
+        <div>
+            <b>{{ user.username }}</b><br />
+            <i>Mon grade: à Venir!</i> // Tooltip pour expliquer les différent grades
+        </div>
+        <h3>mes adresses</h3>
+        <ul>
+            {% for address in user.addresses %}
+                <li>{{ address.name }}</li> Mobile first donc dropdown pour voir le détail des adresses
+            {% else %}
+            <p>Aucune adresse renseigné</p>
+            {% endfor %}
+        </ul>
+        <a href="{{ path('account_address_add') }}">Ajouter une adresse</a>
+        <h2>Mes offres</h2>
+        {% for offer in user.offers %}
+            {{ offer.title }} <br /> Dropdown également ici
+        {% endfor %}
+        <p>Mes offres si j'en ai </p>
+        <a href="{{ path('account_offer_add') }}">Proposer une nouvelle offre</a>
+        <h2>Mes demandes</h2>
+        <p>Mes Demandes si j'en ai </p>
+        <a href="#">Créer une nouvelle demande</a>
+    </div>
+{% endblock %}

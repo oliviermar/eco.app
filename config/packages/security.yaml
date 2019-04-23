@@ -1,0 +1,24 @@
+security:
+    encoders:
+        Domain\Entity\User: 'bcrypt'
+
+    providers:
+        users:
+            entity:
+                class: 'Domain\Entity\User'
+                property: 'username'
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            provider: users
+            anonymous: true
+            logout:
+              path: logout
+              target: index
+
+    access_control:
+         - { path: ^/account, roles: ROLE_USER }
+        # - { path: ^/profile, roles: ROLE_USER }

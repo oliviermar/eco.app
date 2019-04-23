@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  eco-app:
+    build: ./dockerfiles/php/
+    container_name: eco_app
+    volumes:
+      - '../../:/var/www/html/'
+    ports:
+      - "80:80"
+    env_file:
+      - '../../.env'
+    restart: always
+
+  eco-db:
+    image: postgres:10
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: eco
+    restart: always
+    ports:
+      - "5432:5432"

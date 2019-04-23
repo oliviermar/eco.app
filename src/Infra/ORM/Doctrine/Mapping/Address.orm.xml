@@ -1,0 +1,17 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Domain\Entity\Address" table="address">
+        <id name="id" column="id" type="uuid">
+            <generator strategy="NONE"/>
+        </id>
+        <many-to-one field="user" target-entity="Domain\Entity\User" nullable="false" inversed-by="addresses" />
+        <field name="name" column="name" type="string" nullable="false" />
+        <field name="street" column="street" type="string" nullable="false" />
+        <field name="zipcode" column="zipcode" type="string" nullable="false" />
+        <field name="city" column="city" type="string" nullable="false" />
+        <field name="streetNumber" column="street_number" type="integer" nullable="true" />
+        <field name="addressComplement" column="address_complement" type="string" nullable="true" />
+   </entity>
+</doctrine-mapping>

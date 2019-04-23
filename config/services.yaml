@@ -1,0 +1,26 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true 
+
+    UI\Actions\:
+        resource: '../src/UI/Actions'
+        tags: ['controller.service_arguments']
+
+    App\CommandHandler\:
+        resource: '../src/App/CommandHandler'
+        tags: [messenger.message_handler]
+
+    App\QueryFinder\:
+        resource: '../src/App/QueryFinder'
+        tags: [messenger.message_handler]
+
+    Infra\Manager\:
+        resource: '../src/Infra/Manager'
+
+    Domain\Manager\TagManagerInterface: '@Infra\Manager\TagManager'
+
+    Infra\Security\:
+        resource: '../src/Infra/Security'
+
+    Domain\Security\UserAuthenticationInterface: '@Infra\Security\UserAuthentication'

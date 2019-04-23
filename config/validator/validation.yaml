@@ -1,0 +1,11 @@
+Domain\Entity\User:
+    properties:
+        username:
+            - Email: 
+                message: Veuillez renseigner un email valide
+            - NotBlank: 
+                message: Champs requis
+        password:
+            - Type: string
+            - NotBlank: 
+                message: Champs requis

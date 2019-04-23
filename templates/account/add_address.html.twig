@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h2>Ajouter une adresse</h2>
+        <form action="{{ path('account_address_add') }}" method="POST">
+            <input type="hidden" name="submitted" value="1" />
+            {% if error.name is defined %}<span class="has-error">{{error.name}}{% endif %}
+            <label>Nom*
+                <input type="text" name="name" \>
+            </label>
+
+            {% if error.streetNumber is defined %}<span class="has-error">{{error.streetNumber}}{% endif %}
+            <label>Numéro
+                <input type="text" name="streetNumber" \>
+            </label>
+
+            {% if error.street is defined %}<span class="has-error">{{error.street}}{% endif %}
+            <label>Rue*
+                <input type="text" name="street" \>
+            </label>
+
+            {% if error.addressComplement is defined %}<span class="has-error">{{error.addressComplement}}{% endif %}
+            <label>Complément d'address
+                <input type="text" name="addressComplement" \>
+            </label>
+
+            {% if error.zipcode is defined %}<span class="has-error">{{error.zipcode}}{% endif %}
+            <label>Code postal*
+                <input type="text" name="zipcode" \>
+            </label>
+
+            {% if error.city is defined %}<span class="has-error">{{error.city}}{% endif %}
+            <label>Ville*
+                <input type="text" name="city" \>
+            </label>
+
+            <button type="submit">Valider</button>
+        </form>
+    </div>
+{% endblock %}

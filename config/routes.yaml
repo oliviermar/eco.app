@@ -1,0 +1,30 @@
+index:
+    path: /
+    controller: UI\Actions\IndexAction
+
+# Security
+login:
+    path: /login
+    controller: UI\Actions\Security\LoginAction
+
+register:
+    path: /register
+    controller: UI\Actions\Security\RegisterAction
+
+logout:
+    path: /logout
+    methods: GET
+
+# Account
+
+account_detail:
+    path: /account
+    controller: UI\Actions\Account\GetAccountAction
+
+account_address_add:
+    path: /account/address
+    controller: UI\Actions\Account\AddAddressAction
+
+account_offer_add:
+    path: /account/offer
+    controller: UI\Actions\Account\AddOfferAction

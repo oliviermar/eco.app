@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        {% if error is defined %}
+            <span class="has-error">{{error}}</span>
+        {% endif %}
+        <form action="{{ path('login') }}" method="POST">
+            <input type="hidden" name="submitted" value="1" />
+            <input type="text" name="username" />
+            <input type="password" name="password" />
+            <button type="submit">Connection</button>
+        </form>
+    </div>
+    <div>
+        ou <a href="{{ path('register') }}">Inscrivez-vous</a>
+    </div>
+{% endblock %}

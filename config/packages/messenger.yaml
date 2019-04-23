@@ -1,0 +1,18 @@
+framework:
+    messenger:
+        buses:
+            messenger.bus.default:
+                middleware:
+                    - 'App\Middleware\ValidationMiddleware'
+        transports:
+
+        routing:
+            
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true 
+
+
+    App\Middleware\:
+        resource: '../../src/App/Middleware/*'
