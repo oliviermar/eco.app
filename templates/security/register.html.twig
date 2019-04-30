@@ -1,18 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div>
-        <form action="{{ path('register') }}" method="POST">
+    <div class="row">
+        <form action="{{ path('register') }}" method="POST" class="col-sm-12">
             <input type="hidden" name="submitted" value="1" />
+            <div class="form-group">
             {% if error.username is defined %}
                 <span class="has-error">{{ error.username }}</span>
             {% endif %}
-            <input type="text" name="username" />
-            {% if error.password is defined %}
-                <span class="has-error">{{ error.password }}</span>
-            {% endif %}
-            <input type="password" name="password" />
-            <button type="submit">inscription</button>
+                <input class="form-control text-center" id="username" type="text" name="username" placeholder="Email" />
+            </div>
+            <div class="form-group">
+                {% if error.password is defined %}
+                    <span class="has-error">{{ error.password }}</span>
+                {% endif %}
+                <input class="form-control text-center" id="password" type="password" name="password" placeholder="Mots de passe" />
+            </div>
+            <button class="btn btn-secondary btn-block" type="submit">inscription</button>
         </form>
     </div>
 {% endblock %}
