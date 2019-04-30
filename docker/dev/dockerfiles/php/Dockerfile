@@ -7,7 +7,7 @@ ENV APACHE_RUN_GROUP=dockergroup
 RUN addgroup dockergroup --gid 1000
 RUN adduser --ingroup dockergroup --uid 1000 dockeruser --gecos "" --disabled-password
 RUN apt-get update && apt-get install -y \
-    libpq-dev git && docker-php-ext-install pdo pdo_pgsql
+    libpq-dev git zip unzip && docker-php-ext-install pdo pdo_pgsql
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/local/bin --filename=composer \

@@ -7,7 +7,7 @@ services:
     volumes:
       - '../../:/var/www/html/'
     ports:
-      - "80:80"
+      - "8087:80"
     env_file:
       - '../../.env'
     restart: always
@@ -20,4 +20,20 @@ services:
       POSTGRES_DB: eco
     restart: always
     ports:
-      - "5432:5432"
+      - "5444:5432"
+
+  node:
+    image: "node:8"
+    user: "node"
+    env_file:
+        - ../../.env
+    volumes:
+        - "../../:/var/www/html"
+    working_dir: /var/www/html
+    environment:
+      - NODE_ENV=development
+    expose:
+      - "8081"
+    command: >
+        bash -c "yarn install
+        && yarn run encore dev --watch"
