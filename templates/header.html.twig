@@ -1,31 +1,33 @@
 <div class="header"></div>
 <nav class="navbar-expand-lg navbar-light fixed-top" id="mainNav">
-<button 
-    class="navbar-toggler navbar-toggler-right" 
-    type="button" 
-    data-toggle="collapse"
-    data-target="#navbarResponsive" 
-    aria-controls="navbarResponsive" 
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-    >
-    Menu <i class="fas fa-bars"></i>
-</button>
-<div class="collapse navbar-collapse" id="navbarResponsive">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">inscription</a>
-        </li>
-    </ul>
-</div>
-{% if app.user %}
-    Bonjour {{app.user.username}}
-    <a href="{{ path('logout') }}">Déconnexion</a>
-    <a href="{{ path('account_detail') }}">Mon compte</a>
-{% else %}
-    <a href="{{ path('login') }}">Connectez-vous</a>
-{% endif %}
+    <button 
+        class="navbar-toggler navbar-toggler-right col-sm-12" 
+        type="button" 
+        data-toggle="collapse"
+        data-target="#navbarResponsive" 
+        aria-controls="navbarResponsive" 
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        >
+        Menu <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            {% if app.user %}
+                <li class="nav-item col-sm-12">
+                    <a class="nav-link text-center" href="{{ path('logout') }}">Déconnexion</a>
+                </li>
+                <li class="nav-item col-sm-12">
+                    <a class="nav-link text-center" href="{{ path('account_detail') }}">Mon compte</a>
+                </li>
+            {% else %}
+                <li class="nav-item col-sm-12">
+                    <a class="nav-link text-center" href="{{ path('login') }}">Connectez-vous</a>
+                </li>
+                <li class="nav-item col-sm-12">
+                    <a class="nav-link text-center" href="{{ path('register') }}">inscription</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 </nav>
