@@ -44,6 +44,9 @@ class Offer
     /** @var string */
     private $status;
 
+    /** @var DateTime */
+    private $createdAt;
+
     /**
      * Offer constructor
      *
@@ -65,6 +68,7 @@ class Offer
         $this->quantity = $quantity;
         $this->tags = new ArrayCollection();
         $this->status = self::STATUS_NEW;
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -102,7 +106,7 @@ class Offer
     /**
      * @return string
      */
-    public function getDescritpion(): string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -135,5 +139,13 @@ class Offer
         }
 
         return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreateAt(): \DateTime
+    {
+        return $this->createdAt;
     }
 }

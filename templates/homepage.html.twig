@@ -1,1 +1,22 @@
 {% extends "base.html.twig" %}
+
+{% block body %}
+    <section>
+        <h2>Les dernières offres</h2>
+        <div>
+            {% for offer in last_offers %}
+                {{offer.title}}
+                <small>
+                    {% if offer.description|length > 50 %}
+                        {{offer.description|slice(0, 50)}}..
+                    {% else %}
+                        {{ offer.description }}
+                    {% endif %}
+                    <a href="{{ path('offer_show', {'id': offer.id}) }}">Details</a>
+                </small>
+            {% else %}
+                Pas d'offre en cours
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

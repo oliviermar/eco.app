@@ -16,7 +16,6 @@ logout:
     methods: GET
 
 # Account
-
 account_detail:
     path: /account
     controller: UI\Actions\Account\GetAccountAction
@@ -28,3 +27,8 @@ account_address_add:
 account_offer_add:
     path: /account/offer
     controller: UI\Actions\Account\AddOfferAction
+
+#offer
+offer_show:
+    path: /offer/{id}
+    controller: UI\Actions\Offer\ShowAction

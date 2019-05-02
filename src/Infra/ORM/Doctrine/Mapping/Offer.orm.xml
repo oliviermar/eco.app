@@ -17,5 +17,6 @@
         </many-to-many>
         <many-to-one field="address" target-entity="Domain\Entity\Address" />
         <many-to-one field="user" target-entity="Domain\Entity\User" />
+        <field name="createdAt" column="created_at" type="datetime" nullable="false" />
    </entity>
 </doctrine-mapping>

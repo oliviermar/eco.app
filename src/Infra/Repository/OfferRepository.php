@@ -32,4 +32,20 @@ class OfferRepository implements OfferRepositoryInterface
         $this->_em->persist($offer);
         $this->_em->flush();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findById(string $id)
+    {
+        return $this->_em->getRepository(Offer::class)->find($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findMostRecently($limit = 3)
+    {
+        return $this->_em->getRepository(Offer::class)->findAll([], ['createdAt' => 'DESC'], 3);
+    }
 }
