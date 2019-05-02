@@ -1,5 +1,5 @@
 <div class="header"></div>
-<nav class="navbar-expand-lg navbar-light fixed-top" id="mainNav">
+<nav class="navbar-expand-lg navbar-dark bg-primary fixed-top" id="mainNav">
     <button 
         class="navbar-toggler navbar-toggler-right col-sm-12" 
         type="button" 
@@ -13,6 +13,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item col-sm-12">
+                <a class="nav-link text-center" href="{{ path('index') }}">Acceuil</a>
+            </li>
             {% if app.user %}
                 <li class="nav-item col-sm-12">
                     <a class="nav-link text-center" href="{{ path('logout') }}">Déconnexion</a>

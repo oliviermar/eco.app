@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row">
+    <section>
+        <h2 class="text-center mb-3">Inscription</h2>
         <form action="{{ path('register') }}" method="POST" class="col-sm-12">
             <input type="hidden" name="submitted" value="1" />
             <div class="form-group">
@@ -16,7 +17,7 @@
                 {% endif %}
                 <input class="form-control text-center" id="password" type="password" name="password" placeholder="Mots de passe" />
             </div>
-            <button class="btn btn-secondary btn-block" type="submit">inscription</button>
+            <button class="btn btn-primary btn-block" type="submit">inscription</button>
         </form>
-    </div>
+    </section>
 {% endblock %}

@@ -3,3 +3,23 @@
 div.header {
     height: 7rem;
 }
+
+.bg-primary {
+    background-color: #78C2AD !important;
+}
+
+a, a:hover, a:focus {
+    color: #78C2AD;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #78C2AD;
+    border-color: #78C2AD;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #6CC3D5;
+    border-color: #6CC3D5;
+}
