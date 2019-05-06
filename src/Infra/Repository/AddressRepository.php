@@ -40,4 +40,13 @@ class AddressRepository implements AddressRepositoryInterface
     {
         return $this->_em->getRepository(Address::class)->find($identifier);
     }
+
+    /**
+     * @param Address
+     */
+    public function delete(Address $address)
+    {
+        $this->_em->remove($address);
+        $this->_em->flush();
+    }
 }

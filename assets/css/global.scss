@@ -4,6 +4,10 @@ div.header {
     height: 7rem;
 }
 
+select { 
+    text-align-last:center; 
+}
+
 .bg-primary {
     background-color: #78C2AD !important;
 }
@@ -12,14 +16,18 @@ a, a:hover, a:focus {
     color: #78C2AD;
 }
 
-.btn-primary {
+.btn-primary, .btn-primary:hover {
     color: #fff;
     background-color: #78C2AD;
     border-color: #78C2AD;
 }
 
-.btn-info {
+.btn-info, .btn-info:hover {
     color: #fff;
     background-color: #6CC3D5;
     border-color: #6CC3D5;
+}
+
+.btn-link, .btn-link:hover {
+    color: #78C2AD;
 }

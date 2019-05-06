@@ -1,4 +1,6 @@
 Domain\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: username
     properties:
         username:
             - Email: 
@@ -9,3 +11,27 @@ Domain\Entity\User:
             - Type: string
             - NotBlank: 
                 message: Champs requis
+
+Domain\Entity\Address:
+    properties:
+        name:
+            - NotBlank: 
+                message: Champs requis
+        street:
+            - NotBlank: 
+                message: Champs requis
+        zipcode:
+            - NotBlank:
+                message: Champs requis
+            - Type: 
+                type: integer
+                message: Code postal invalide
+            - length:
+                min: 5
+                max: 5
+                exactMessage: Code postal invalide
+        city:
+            - NotBlank:
+                message: Champs requis
+        streetNumber:
+            - Type: integer

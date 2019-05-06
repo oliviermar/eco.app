@@ -2,17 +2,14 @@
 
 namespace App\Command;
 
-use Ramsey\Uuid\UuidInterface;
-use Ramsey\Uuid\Uuid;
-
 /**
- * Class AddAddressCommand
+ * Class UpdateAddressCommand
  *
  * @author Olivier Maréchal <o.marechal@wakeonweb.com>
  */
-class AddAddressCommand
+class UpdateAddressCommand
 {
-    /** @var strig */
+    /** @var string */
     private $id;
 
     /** @var string */
@@ -41,9 +38,9 @@ class AddAddressCommand
      * @param int    $streetNumber
      * @param string $addressComplement
      */
-    public function __construct(string $name, string $street, string $zipcode, string $city, int $streetNumber = null, string $addressComplement = null)
+    public function __construct(string $id, string $name, string $street, string $zipcode, string $city, int $streetNumber = null, string $addressComplement = null)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = $id;
         $this->name = $name;
         $this->street = $street;
         $this->zipcode = $zipcode;
@@ -53,9 +50,9 @@ class AddAddressCommand
     }
 
     /**
-     * @return UuidInterface
+     * @return string
      */
-    public function getId(): UuidInterface
+    public function getId(): string
     {
         return $this->id;
     }

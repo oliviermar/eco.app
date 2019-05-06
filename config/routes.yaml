@@ -22,11 +22,21 @@ account_detail:
 
 account_address_add:
     path: /account/address
+    methods: ['GET']
     controller: UI\Actions\Account\AddAddressAction
+
+account_address_update:
+    path: /account/address/{id}
+    methods: ['GET', 'POST']
+    controller: UI\Actions\Account\UpdateAddressAction
 
 account_offer_add:
     path: /account/offer
     controller: UI\Actions\Account\AddOfferAction
+
+account_address_delete:
+    path: /account/address/delete/{id}
+    controller: UI\Actions\Account\DeleteAddressAction
 
 #offer
 offer_show:

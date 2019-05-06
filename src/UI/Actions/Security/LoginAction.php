@@ -29,7 +29,7 @@ class LoginAction extends BaseAction
                 return $this->render('security/login.html.twig', ['error' => $e->getMessage()]);
             }
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('account_detail');
         }
 
         return $this->render('security/login.html.twig');

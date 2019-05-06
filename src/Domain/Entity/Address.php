@@ -100,7 +100,7 @@ class Address
     /**
      * @return string
      */
-    public function getCity(): string
+     public function getCity(): string
     {
         return $this->city;
     }
@@ -129,6 +129,78 @@ class Address
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return self
+     */
+    public function rename(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @param string $street
+     *
+     * @return self
+     */
+    public function setStreet(string $street): self
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    /**
+     * @param string $street
+     *
+     * @return self
+     */
+    public function setZipCode(string $zipcode): self
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    /**
+     * @param string $city
+     *
+     * @return self
+     */
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @param string $streetNumber
+     *
+     * @return self
+     */
+    public function setStreetNumber(string $streetNumber): self
+    {
+        $this->streetNumber = $streetNumber;
+
+        return $this;
+    }
+
+    /**
+     * @param string $addressComplement
+     *
+     * @return self
+     */
+    public function setAddressComplement(string $addressComplement = null): self
+    {
+        $this->addressComplement = $addressComplement;
 
         return $this;
     }

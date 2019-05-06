@@ -5,6 +5,7 @@ namespace Infra\Repository;
 use Doctrine\ORM\EntityManagerInterface;
 use Domain\Repository\OfferRepositoryInterface;
 use Domain\Entity\Offer;
+use Domain\Entity\Address;
 
 /**
  * Class OfferRepository
@@ -46,6 +47,21 @@ class OfferRepository implements OfferRepositoryInterface
      */
     public function findMostRecently($limit = 3)
     {
-        return $this->_em->getRepository(Offer::class)->findAll([], ['createdAt' => 'DESC'], 3);
+        return $this->_em->getRepository(Offer::class)
+            ->createQueryBuilder('o')
+            ->where('o.status = :status')
+            ->setParameter(':status', Offer::STATUS_PUBLISH)
+            ->setMaxResults($limit)
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findByAddress(Address $address)
+    {
+        return $this->_em->getRepository(Offer::class)->findBy(['address' => $address]);
     }
 }

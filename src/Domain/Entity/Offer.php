@@ -14,11 +14,10 @@ use Ramsey\Uuid\UuidInterface;
  */
 class Offer
 {
-    const STATUS_NEW = 'Nouveau';
-    const STATUS_VALID = 'Validé';
-    const STATUS_REFUSED = 'Refusé';
+    const STATUS_PUBLISH = 'Publié';
+    const STATUS_UNPUBLISH = 'Dépublié';
     const STATUS_CANCEL = 'Annulé';
-    const STATUS_CLOSED = 'Terminé';
+    const STATUS_FINISH = 'Terminé';
 
     /** @var UuidInterface */
     private $id;
@@ -67,7 +66,7 @@ class Offer
         $this->description = $description;
         $this->quantity = $quantity;
         $this->tags = new ArrayCollection();
-        $this->status = self::STATUS_NEW;
+        $this->status = self::STATUS_PUBLISH;
         $this->createdAt = new \DateTime();
     }
 
@@ -147,5 +146,27 @@ class Offer
     public function getCreateAt(): \DateTime
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @param Address $address
+     */
+    public function setAddress(Address $address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return self
+     */
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }

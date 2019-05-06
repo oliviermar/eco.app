@@ -22,4 +22,9 @@ interface AddressRepositoryInterface
      * @return Address|null
      */
     public function find(string $identifier);
+
+    /**
+     * @param Address $address
+     */
+    public function delete(Address $address);
 }

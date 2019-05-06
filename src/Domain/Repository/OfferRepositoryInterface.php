@@ -3,6 +3,7 @@
 namespace Domain\Repository;
 
 use Domain\Entity\Offer;
+use Domain\Entity\Address;
 
 /**
  * Interface OfferRepositoryInterface
@@ -25,4 +26,9 @@ interface OfferRepositoryInterface
      * @param int $limit
      */
     public function findMostRecently($limit = 3);
+
+    /**
+     * @param Address $address
+     */
+    public function findByAddress(Address $address);
 }

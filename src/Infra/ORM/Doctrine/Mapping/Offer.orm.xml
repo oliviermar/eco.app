@@ -10,12 +10,13 @@
         <field name="title" column="title" type="string" length="50" nullable="false" />
         <field name="description" column="description" type="text" nullable="false" />
         <field name="quantity" column="quantity" type="string" nullable="true" />
+        <field name="status" column="status" type="string" nullable="false" />
         <many-to-many field="tags" target-entity="Domain\Entity\Tag">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </many-to-many>
-        <many-to-one field="address" target-entity="Domain\Entity\Address" />
+        <many-to-one field="address" target-entity="Domain\Entity\Address" nullable="true" />
         <many-to-one field="user" target-entity="Domain\Entity\User" />
         <field name="createdAt" column="created_at" type="datetime" nullable="false" />
    </entity>

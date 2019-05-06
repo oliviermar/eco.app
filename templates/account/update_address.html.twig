@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <h2 class="text-center mb-3">modifier {{address.name}}</h2>
+        <form action="{{ path('account_address_update', {'id': address.id}) }}" method="POST" class="col-sm-12">
+            <input type="hidden" name="submitted" value="1" />
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Nom*" class="form-control text-center {{ error.name is defined ? 'is-invalid' : '' }}" value="{{address.name}}" \>
+                {% if error.name is defined %}<div class="invalid-feedback">{{error.name}}</div>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="streetNumber" class="form-control text-center {{ error.streetNumber is defined ? 'is-invalid' : '' }}" placeholder="N° de rue" value="{{address.streetNumber}}" \>
+                {% if error.streetNumber is defined %}<div class="invalid-feedback">{{error.streetNumber}}</div>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="street" class="form-control text-center {{ error.street is defined ? 'is-invalid' : ''}}" placeholder="Rue*" value="{{address.street}}" \>
+                {% if error.street is defined %}<div class="invalid-feedback">{{error.street}}</div>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="addressComplement" class="form-control text-center {{ error.addressComplement is defined ? 'is-invalid' : '' }}" placeholder="Complément d'adresse" value="{{address.addressComplement}}" \>
+                {% if error.addressComplement is defined %}<div class="invalid-feedback">{{error.addressComplement}}</div>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="zipcode" class="form-control text-center {{ error.zipCode is defined ? 'is-invalid' : '' }}" placeholder="Code postal" value="{{address.zipcode}}" \>
+                {% if error.zipcode is defined %}<div class="invalid-feedback">{{error.zipcode}}</div>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="city" class="form-control text-center {{ error.city is defined ? 'is-invalid' : '' }}" placeholder="Ville*" value="{{address.city}}" \>
+                {% if error.city is defined %}<div class="invalid-feedback">{{error.city}}</div>{% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Valider</button>
+            <a href="{{ path("account_detail") }}" class="btn btn-info btn-block">Annulé</a>
+        </form>
+    </section>
+{% endblock %}
