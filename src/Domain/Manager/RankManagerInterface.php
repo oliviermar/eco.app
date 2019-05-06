@@ -14,5 +14,5 @@ interface RankManagerInterface
     /**
      * @param UserInterface $user
      */
-    public function updateRank(UserInterface $user);
+    public function getRank(UserInterface $user);
 }

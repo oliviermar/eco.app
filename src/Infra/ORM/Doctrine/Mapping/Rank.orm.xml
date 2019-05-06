@@ -9,5 +9,8 @@
 
         <field name="name" column="name" type="string" length="50" nullable="false" />
         <field name="picto" column="picto" type="string" nullable="false" />
+        <field name="start" column="score_start" type="integer" nullable="false" />
+        <field name="end" column="score_end" type="integer" nullable="false" />
+        <field name="level" column="level" type="integer" nullable="false" />
    </entity>
 </doctrine-mapping>

@@ -15,6 +15,11 @@ logout:
     path: /logout
     methods: GET
 
+# Dashboard
+dashboard:
+    path: /dashboard
+    controller: UI\Actions\Dashboard\IndexAction
+
 # Account
 account_detail:
     path: /account

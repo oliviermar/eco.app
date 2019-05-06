@@ -26,7 +26,7 @@ Domain\Entity\Address:
             - Type: 
                 type: integer
                 message: Code postal invalide
-            - length:
+            - Length:
                 min: 5
                 max: 5
                 exactMessage: Code postal invalide
@@ -34,4 +34,5 @@ Domain\Entity\Address:
             - NotBlank:
                 message: Champs requis
         streetNumber:
-            - Type: integer
+            - NotBlank:
+                message: Champs requis

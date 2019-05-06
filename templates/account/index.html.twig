@@ -11,17 +11,6 @@
     </section>
     <section>
         {% include 'address/list.html.twig' with {'user': user} %}
-    </section>
-    <section>
         <a class="mt-3 btn btn-primary btn-block" href="{{ path('account_address_add') }}">Ajouter une adresse</a>
-        <h2>Mes offres</h2>
-        {% for offer in user.offers %}
-            {{ offer.title }} <br /> Dropdown également ici
-        {% endfor %}
-        <p>Mes offres si j'en ai </p>
-        <a href="{{ path('account_offer_add') }}">Proposer une nouvelle offre</a>
-        <h2>Mes demandes</h2>
-        <p>Mes Demandes si j'en ai </p>
-        <a href="#">Créer une nouvelle demande</a>
     </section>
 {% endblock %}

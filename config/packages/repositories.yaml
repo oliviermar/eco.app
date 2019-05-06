@@ -10,4 +10,5 @@ services:
     Domain\Repository\AddressRepositoryInterface: '@Infra\Repository\AddressRepository'
     Domain\Repository\OfferRepositoryInterface: '@Infra\Repository\OfferRepository'
     Domain\Repository\TagRepositoryInterface: '@Infra\Repository\TagRepository'
+    Domain\Repository\RankRepositoryInterface: '@Infra\Repository\RankRepository'
 

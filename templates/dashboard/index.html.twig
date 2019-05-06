@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Mon tableau de bord</h1>
+    <section>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-offer-tab" data-toggle="tab" href="#nav-offer" role="tab" aria-controls="nav-offer" aria-selected="true">Mes offres</a>
+                <a class="nav-item nav-link" id="nav-request-tab" data-toggle="tab" href="#nav-request" role="tab" aria-controls="nav-request" aria-selected="false">Mes demandes</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-offer" role="tabpanel" aria-labelledby="nav-offer-tab">
+                {% for offer in user.offers %}
+                    {{ offer.title }} <br /> Dropdown également ici
+                {% endfor %}
+                <a href="{{ path('account_offer_add') }}">Proposer une nouvelle offre</a>
+            </div>
+            <div class="tab-pane fade" id="nav-request" role="tabpanel" aria-labelledby="nav-request-tab">
+                <p>Mes Demandes si j'en ai </p>
+                <a href="#">Créer une nouvelle demande</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

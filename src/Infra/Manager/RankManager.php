@@ -15,7 +15,7 @@ class RankManager implements RankManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function updateRank(UserInterface $user)
+    public function getRank(UserInterface $user)
     {
         throw new \Exception('Should be implement');
     }
