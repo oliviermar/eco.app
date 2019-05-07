@@ -1,17 +1,17 @@
-<h3>mes adresses</h3>
+<h3>Mes adresses</h3>
 <div id="accordion">
     {% for address in user.addresses %}
         <div class="card">
             <div class="card-header" id="{{ address.id }}">
                 <h5 class="mb-0">
-                    <button class="btn btn-link btn-block" data-toggle="collapse" data-target="#collapse_{{address.id}}" aria-expanded="false" aria-controls="collapse_{{address.id}}">
+                    <button class="btn btn-link btn-block text-info" data-toggle="collapse" data-target="#collapse_{{address.id}}" aria-expanded="false" aria-controls="collapse_{{address.id}}">
                         {{ address.name }}
                     </button>
                 </h5>
             </div>
 
             <div id="collapse_{{address.id}}" class="collapse" aria-labelledby="{{ address.id }}" data-parent="#accordion">
-                <div class="card-body">
+                <div class="card-body text-dark">
                     <p>
                         {{ address.streetNumber }} {{ address.street }}
                         {{ address.addressComplement }}

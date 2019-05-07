@@ -4,6 +4,10 @@ div.header {
     height: 7rem;
 }
 
+.jumbotron {
+    background-color: #78C2AD;
+}
+
 select { 
     text-align-last:center; 
 }
@@ -38,3 +42,13 @@ a, a:hover, a:focus {
     font-size: 80%;
     color: #dc3545;
 }
+
+.progress {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.progress-bar {
+    background-color: #6CC3D5;
+}
+
