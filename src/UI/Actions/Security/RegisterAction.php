@@ -25,7 +25,12 @@ class RegisterAction extends BaseAction
     {
         if ($request->get('submitted')) {
             $id = Uuid::uuid4();
-            $command = new RegisterCommand($id, $request->get('username', ''), $request->get('password', ''));
+            $command = new RegisterCommand(
+                $id,
+                $request->get('username', ''),
+                $request->get('password', ''),
+                $request->get('stripeId', null)
+            );
             try {
                 $this->bus->dispatch($command);
             } catch (InvalidEntityException $e) {

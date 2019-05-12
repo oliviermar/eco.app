@@ -45,6 +45,32 @@ class OfferRepository implements OfferRepositoryInterface
     /**
      * {@inheritdoc}
      */
+    public function publish(string $id)
+    {
+        $offer = $this->findById($id);
+
+        if ($offer) {
+            $offer->setStatus(Offer::STATUS_PUBLISH);
+            $this->save($offer);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cancel(string $id)
+    {
+        $offer = $this->findById($id);
+
+        if ($offer) {
+            $offer->setStatus(Offer::STATUS_CANCEL);
+            $this->save($offer);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findMostRecently($limit = 3)
     {
         return $this->_em->getRepository(Offer::class)

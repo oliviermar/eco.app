@@ -31,4 +31,14 @@ interface OfferRepositoryInterface
      * @param Address $address
      */
     public function findByAddress(Address $address);
+
+    /**
+     * @param string $id
+     */
+    public function cancel(string $id);
+
+    /**
+     * @param string $id
+     */
+    public function publish(string $id);
 }

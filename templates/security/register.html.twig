@@ -2,23 +2,35 @@
 
 {% block body %}
     <section>
-        <h2 class="text-center mb-3">Inscription</h2>
-        <form action="{{ path('register') }}" method="POST" class="col-sm-12">
-            <input type="hidden" name="submitted" value="1" />
-            <div class="form-group">
-            {% if error.username is defined %}
-                <span class="has-error">{{ error.username }}</span>
-            {% endif %}
-                <input class="form-control text-center" id="username" type="text" name="username" placeholder="Email" />
+        <div class="head">
+            <div class="container">
+                <h1>Inscription</h1>
             </div>
-            <div class="form-group">
-                {% if error.password is defined %}
-                    <span class="has-error">{{ error.password }}</span>
-                {% endif %}
-                <input class="form-control text-center" id="password" type="password" name="password" placeholder="Mots de passe" />
+        </div>
+        <div class="container inner">
+            <div class="jumbotron">
+                <form action="{{ path('register') }}" method="POST" class="col-sm-12">
+                    <input type="hidden" name="submitted" value="1" />
+                    <div class="form-group">
+                    {% if error.username is defined %}
+                        <span class="has-error">{{ error.username }}</span>
+                    {% endif %}
+                        <input class="form-control text-center" id="username" type="text" name="username" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        {% if error.password is defined %}
+                            <span class="has-error">{{ error.password }}</span>
+                        {% endif %}
+                        <input class="form-control text-center" id="password" type="password" name="password" placeholder="Mots de passe" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control text-center" name="stripeId" placeholder="Identifiant Stripe" />
+                        <small>Un compte <b><i><a href="https://stripe.com/fr">Stripe</a></i></b> est necessaire pour recevoir le paiement de vos ventes éventuelles</small>
+                    </div>
+                    <button class="btn btn-primary btn-block" type="submit">Inscription</button>
+                    <a href="{{ path('login') }}" class="btn btn-info btn-block">Connexion</a>
+                </form>
             </div>
-            <button class="btn btn-info btn-block" type="submit">Inscription</button>
-            <a href="{{ path('login') }}" class="btn btn-danger btn-block">Connexion</a>
-        </form>
+        </div>
     </section>
 {% endblock %}

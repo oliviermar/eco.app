@@ -34,12 +34,15 @@ class User implements UserInterface
     /** @var int */
     private $score = 1;
 
+    /** @var string */
+    private $stripeId;
+
     /**
      * @param UuidInterface $uuid
      * @param string        $username
      * @param array         $roles
      */
-    public function __construct(UuidInterface $uuid, string $username, array $roles = [])
+    public function __construct(UuidInterface $uuid, string $username, string $stripeId = null, array $roles = [])
     {
         $this->id = $uuid;
         $this->username = $username;
@@ -48,8 +51,17 @@ class User implements UserInterface
         }
 
         $this->roles = $roles;
+        $this->stripeId = $stripeId;
         $this->addresses = [];
         $this->offers = [];
+    }
+
+    /**
+     * @return UuidInterface
+     */
+    public function getId(): UuidInterface
+    {
+        return $this->id;
     }
 
     /**
@@ -110,6 +122,14 @@ class User implements UserInterface
     public function getAddresses(): \Traversable
     {
         return $this->addresses;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStripeId(): ?string
+    {
+        return $this->stripeId;
     }
 
     /**

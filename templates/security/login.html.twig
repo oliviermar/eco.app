@@ -2,25 +2,30 @@
 
 {% block body %}
     <section>
-        <h2 class="text-center mb-3">Connexion</h2>
-        <form action="{{ path('login') }}" method="POST" class="col-sm-12">
-            <div class="form-group">
-                <input type="hidden" name="submitted" value="1" />
-                <input class="form-control text-center" id="username" type="text" name="username" placeholder="Email" />
+        <div class="head">
+            <div class="container">
+                <h1>Connexion</h1>
             </div>
-            <div class="form-group">
-                <input class="form-control text-center " id="password" type="password" name="password" placeholder="Mots de passe" />
+        </div>
+        <div class="container inner">
+            <div class="jumbotron">
+                <form action="{{ path('login') }}" method="POST" class="col-sm-12">
+                    <div class="form-group">
+                        <input type="hidden" name="submitted" value="1" />
+                        <input class="form-control text-center" id="username" type="text" name="username" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control text-center " id="password" type="password" name="password" placeholder="Mots de passe" />
 
-            {% if error is defined %}
-                <div class="error text-center">{{error}}</div>
-            {% endif %}
+                    {% if error is defined %}
+                        <div class="error text-center">{{error}}</div>
+                    {% endif %}
+                    </div>
+
+                    <button class="btn btn-primary btn-block" type="submit">Connexion</button>
+                    <a class="btn btn-info btn-block" href="{{ path('register') }}">Inscrivez-vous</a>
+                </form>
             </div>
-
-            <button class="btn btn-info btn-block" type="submit">Connexion</button>
-        </form>
-        <div class="col-sm-12 text-center mt-3"><p>ou</p></div>
-        <div class="col-sm-12">
-            <a class="btn btn-primary btn-block" href="{{ path('register') }}">Inscrivez-vous</a>
         </div>
     </section>
 {% endblock %}

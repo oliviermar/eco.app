@@ -51,3 +51,11 @@ offer_add:
 offer_update:
     path: /offer/update/{id}
     controller: UI\Actions\Offer\UpdateOfferAction
+
+offer_cancel:
+    path: /offer/cancel/{id}
+    controller: UI\Actions\Offer\CancelOfferAction
+
+offer_publish:
+    path: /offer/publish/{id}
+    controller: UI\Actions\Offer\PublishOfferAction

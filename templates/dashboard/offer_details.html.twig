@@ -1,0 +1,26 @@
+<div class="card col-lg-4 col-md-6 col-sm-6 col-xs-12 pl-0 pr-0">
+    {% if offer.image %}
+        <img class="card-img-top" src="{{ asset('/uploads/offer/'~offer.image) }}" alt="{{ offer.title }}">
+    {% else %}
+        <img class="card-img-top" src="{{ asset('/build/default.jpg') }}" alt="{{ offer.title }}">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ offer.title }}</h5>
+        <p class="card-text">
+            {% if offer.description|length > 150 %}
+                {{offer.description|slice(0, 150)}}...
+            {% else %}
+                {{ offer.description }}
+            {% endif %}
+        </p>
+        <div class="d-flex">
+            <a href="{{ path('offer_update', {'id': offer.id}) }}" class="btn btn-primary">Modifier l'annonce</a>
+            {% if offer.status != constant('Domain\\Entity\\Offer::STATUS_CANCEL') %}
+                <a href="{{ path('offer_cancel', {'id': offer.id}) }}" class="btn btn-danger">Annuler l'annonce</a>
+            {% endif %}
+            {% if offer.status != constant('Domain\\Entity\\Offer::STATUS_PUBLISH') %}
+                <a href="{{ path('offer_publish', {'id': offer.id}) }}" class="btn btn-danger">Publier l'annonce</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

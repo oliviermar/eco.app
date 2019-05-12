@@ -49,7 +49,7 @@ class RegisterCommandHandler implements MessageHandlerInterface
      */
     public function __invoke(RegisterCommand $command)
     {
-        $user = new User($command->getId(), $command->getUsername());
+        $user = new User($command->getId(), $command->getUsername(), $command->getStripeId());
         $passwordEncoded = $this->encoder->encodePassword($user, $command->getPassword());
         $user->setPassword($passwordEncoded);
         $errors = $this->validator->validate($user);

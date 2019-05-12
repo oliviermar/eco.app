@@ -10,7 +10,8 @@
         <div class="container inner">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active pr-2 pl-2" id="nav-offer-tab" data-toggle="tab" href="#nav-offer" role="tab" aria-controls="nav-offer" aria-selected="true">Mes offres</a>
+                    <a class="nav-item nav-link active pr-2 pl-2" id="nav-offer-tab" data-toggle="tab" href="#nav-offer" role="tab" aria-controls="nav-offer" aria-selected="true">Offres en cours</a>
+                    <a class="nav-item nav-link pr-2 pl-2" id="nav-offer-archive-tab" data-toggle="tab" href="#nav-offer-archive" role="tab" aria-controls="nav-offer-archive" aria-selected="true">Archives</a>
                     <a class="nav-item nav-link pr-2 pl-2" id="nav-request-tab" data-toggle="tab" href="#nav-request" role="tab" aria-controls="nav-request" aria-selected="false">Mes demandes</a>
                 </div>
             </nav>
@@ -18,24 +19,15 @@
                 <div class="tab-pane fade show active p-3" id="nav-offer" role="tabpanel" aria-labelledby="nav-offer-tab">
                     <div class="d-flex">
                         {% for offer in user.offers if offer.status == constant('Domain\\Entity\\Offer::STATUS_PUBLISH') %}
-                            <div class="card col-lg-4 col-md-6 col-sm-6 col-xs-12 pl-0 pr-0">
-                                {% if offer.image %}
-                                    <img class="card-img-top" src="{{ asset('/uploads/offer/'~offer.image) }}" alt="{{ offer.title }}">
-                                {% else %}
-                                    <img class="card-img-top" src="{{ asset('/build/default.jpg') }}" alt="{{ offer.title }}">
-                                {% endif %}
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ offer.title }}</h5>
-                                    <p class="card-text">
-                                        {% if offer.description|length > 150 %}
-                                            {{offer.description|slice(0, 150)}}...
-                                        {% else %}
-                                            {{ offer.description }}
-                                        {% endif %}
-                                    </p>
-                                    <a href="{{ path('offer_update', {'id': offer.id}) }}" class="btn btn-primary">modifier l'annonce</a>
-                                </div>
-                            </div>
+                            {% include 'dashboard/offer_details.html.twig' with {'offer' : offer} %}
+                        {% endfor %}
+                    </div>
+                    <a href="{{ path('offer_add') }}" class="btn btn-primary mt-3">Proposer une nouvelle offre</a>
+                </div>
+                <div class="tab-pane fade show p-3" id="nav-offer-archive" role="tabpanel" aria-labelledby="nav-offer-archive-tab">
+                    <div class="d-flex">
+                        {% for offer in user.offers if offer.status == constant('Domain\\Entity\\Offer::STATUS_CANCEL') %}
+                            {% include 'dashboard/offer_details.html.twig' with {'offer' : offer} %}
                         {% endfor %}
                     </div>
                     <a href="{{ path('offer_add') }}" class="btn btn-primary mt-3">Proposer une nouvelle offre</a>
