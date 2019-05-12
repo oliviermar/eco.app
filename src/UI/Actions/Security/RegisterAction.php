@@ -32,7 +32,7 @@ class RegisterAction extends BaseAction
                 return $this->render('security/register.html.twig', ['error' => $e->getViolations()]);
             }
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('account_detail');
         }
 
         return $this->render('security/register.html.twig');

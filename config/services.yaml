@@ -23,4 +23,13 @@ services:
     Infra\Security\:
         resource: '../src/Infra/Security'
 
+    UI\Form\OfferType:
+        arguments:
+            $targetDirectory: '%kernel.project_dir%/public/uploads/offer/'
+
+    Infra\Uploader\FileUploader:
+        arguments:
+            $targetDirectory: '%kernel.project_dir%/public/uploads/offer/'
+
     Domain\Security\UserAuthenticationInterface: '@Infra\Security\UserAuthentication'
+    Domain\Uploader\FileUploaderInterface: '@Infra\Uploader\FileUploader'

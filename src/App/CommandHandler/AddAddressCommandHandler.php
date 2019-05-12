@@ -3,7 +3,7 @@
 namespace App\CommandHandler;
 
 use App\Command\AddAddressCommand;
-use Domain\Exeption\InvalidEntityException;
+use Domain\Exception\InvalidEntityException;
 use Domain\Entity\Address;
 use Domain\Repository\AddressRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -44,16 +44,16 @@ class AddAddressCommandHandler implements MessageHandlerInterface
     public function __invoke(AddAddressCommand $command)
     {
         $user = $this->tokenStorage->getToken()->getUser();
-        $address = new Address(
-            $command->getId(),
-            $user,
-            $command->getName(),
-            $command->getStreet(),
-            $command->getZipcode(),
-            $command->getCity(),
-            $command->getStreetNumber(),
-            $command->getAddressComplement()
-        );
+        $address = new Address();
+        $address
+            ->setId($command->getId())
+            ->setUser($user)
+            ->setName($command->getName())
+            ->setStreet($command->getStreet())
+            ->setZipcode($command->getZipcode())
+            ->setCity($command->getCity())
+            ->setStreetNumber($command->getStreetNumber())
+            ->setAddressComplement($command->getAddressComplement());
 
         $user->addAddress($address);
 

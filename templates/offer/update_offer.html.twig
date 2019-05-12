@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="head">
+            <div class="container">
+                <h1>Modification de l'offre {{offer.title}}</h1>
+            </div>
+        </div>
+        <div class="container inner">
+            <form action="{{ path('offer_update', {'id': offer.id }) }}" method="POST" class="col-sm-12">
+                <input type="hidden" name="submitted" value="1" />
+                <div class="form-group">
+                    <input type="text" name="title" placeholder="Titre*" class="form-control text-center" value="{{offer.title}}" \>
+                    {% if error.title is defined %}<span class="has-error">{{error.title}}{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="description" placeholder="Description*" class="form-control text-center" value="{{ offer.description }}" \>
+                    {% if error.description is defined %}<span class="has-error">{{error.description}}{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="quantity" placeholder="Quantité*" class="form-control text-center" value="{{ offer.quantity }}" \>
+                    {% if error.quantity is defined %}<span class="has-error">{{error.quantity}}</span>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <select name="addressId" class="form-control">
+                        <option class="text-center">Choisir une adresse*</option>
+                        {% for address in addresses %}
+                            {% if address.id == offer.address.id %}
+                                <option class="text-center" value="{{ address.id }}" selected>{{ address.name }}</option>
+                            {% else %}
+                                <option class="text-center" value="{{ address.id }}">{{ address.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% if error.addressId is defined %}<span class="has-error">{{error.addressId}}{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="price" placeholder="prix" class="form-control text-center" value="{{offer.price}}" \>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="tags" placeholder="Tag (bois plastique palette ...)" class="form-control text-center" value="{{ offer.tags|join(' ') }}" \>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mt-3">Valider</button>
+                <a href="{{ path("dashboard") }}" class="btn btn-info btn-block">Annulé</a>
+            </form>
+        </div>
+    </section>
+{% endblock %}

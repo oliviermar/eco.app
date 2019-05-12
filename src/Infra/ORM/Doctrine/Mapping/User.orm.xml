@@ -10,6 +10,7 @@
         <field name="username" column="username" type="string" nullable="false" />
         <field name="roles" column="roles" type="array" nullable="false" />
         <field name="password" column="password" type="text" nullable="false" />
+        <field name="score" column="score" type="integer" nullable="false" />
         <one-to-many field="addresses" target-entity="Domain\Entity\Address" mapped-by="user" />
         <one-to-many field="offers" target-entity="Domain\Entity\Offer" mapped-by="user" />
    </entity>

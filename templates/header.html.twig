@@ -1,40 +1,45 @@
 <div class="header"></div>
-<nav class="navbar-expand-lg navbar-dark bg-primary fixed-top" id="mainNav">
-    <button 
-        class="navbar-toggler navbar-toggler-right col-sm-12" 
-        type="button" 
-        data-toggle="collapse"
-        data-target="#navbarResponsive" 
-        aria-controls="navbarResponsive" 
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        >
-        Menu <i class="fas fa-bars"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item col-sm-12">
-                <a class="nav-link text-center" href="{{ path('index') }}">Acceuil</a>
-            </li>
-            {% if app.user %}
-                <li class="nav-item col-sm-12">
-                    <a class="nav-link text-center" href="{{ path('logout') }}">Déconnexion</a>
+<header>
+    <nav class="navbar-expand-lg navbar-inner navbar-dark bg-white fixed-top" id="mainNav">
+        <div class="navbar-header">
+            <a class="float-left ml-3" href="{{ path('index') }}">
+                <img src="{{ asset('build/logo.png') }}" width="100"/>
+            </a>
+            <a
+                class="btn navbar navbar-toggler navbar-toggler-right mr-3 float-right"
+                data-toggle="collapse"
+                data-target="#navbarResponsive" 
+                aria-controls="navbarResponsive" 
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                >
+                <span class="navbar-toggler-icon"></span>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item col-xs-12">
+                    <a class="nav-link" href="{{ path('index') }}">Acceuil</a>
                 </li>
-                <li class="nav-item col-sm-12">
-                    <a class="nav-link text-center" href="{{ path('account_detail') }}">Mon compte</a>
-                </li>
-                <li class="nav-item col-sm-12">
-                    <a class="nav-link text-center" href="{{ path('dashboard') }}">Mon tableau de bord</a>
-                </li>
-
-            {% else %}
-                <li class="nav-item col-sm-12">
-                    <a class="nav-link text-center" href="{{ path('login') }}">Connectez-vous</a>
-                </li>
-                <li class="nav-item col-sm-12">
-                    <a class="nav-link text-center" href="{{ path('register') }}">inscription</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
-</nav>
+                {% if app.user %}
+                    <li class="nav-item col-xs-12">
+                        <a class="nav-link" href="{{ path('dashboard') }}">Mon tableau de bord</a>
+                    </li>
+                    <li class="nav-item col-xs-12">
+                        <a class="nav-link" href="{{ path('account_detail') }}">Mon compte</a>
+                    </li>
+                    <li class="nav-item col-xs-12">
+                        <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item col-xs-12">
+                        <a class="nav-link" href="{{ path('login') }}">Connectez-vous</a>
+                    </li>
+                    <li class="nav-item col-xs-12">
+                        <a class="nav-link" href="{{ path('register') }}">inscription</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>

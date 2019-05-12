@@ -11,6 +11,7 @@
         <field name="description" column="description" type="text" nullable="false" />
         <field name="quantity" column="quantity" type="string" nullable="true" />
         <field name="status" column="status" type="string" nullable="false" />
+        <field name="price" column="price" type="float" nullable="false" />
         <many-to-many field="tags" target-entity="Domain\Entity\Tag">
             <cascade>
                 <cascade-persist/>
@@ -19,5 +20,6 @@
         <many-to-one field="address" target-entity="Domain\Entity\Address" nullable="true" />
         <many-to-one field="user" target-entity="Domain\Entity\User" />
         <field name="createdAt" column="created_at" type="datetime" nullable="false" />
+        <field name="image" column="image" type="string" nullable="true" />
    </entity>
 </doctrine-mapping>

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="head">
+            <div class="container">
+                {% if address is defined %}
+                    <h1>Modifier {{ address.name }}</h1>
+                {% else %}
+                    <h1>Ajouter une adresse</h1>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container inner">
+            <div class="jumbotron text-center">
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.streetNumber) }}
+                        {{ form_widget(form.streetNumber) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.street) }}
+                        {{ form_widget(form.street) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.addressComplement) }}
+                        {{ form_widget(form.addressComplement) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.zipcode) }}
+                        {{ form_widget(form.zipcode) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.city) }}
+                        {{ form_widget(form.city) }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mb-3">Valider</button>
+                    <a href="{{ path("account_detail") }}" class="btn btn-info btn-block">Annuler</a>
+                {{form_end(form)}}
+            </div>
+        </div>
+    </section>
+{% endblock %}

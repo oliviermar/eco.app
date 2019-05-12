@@ -27,17 +27,13 @@ account_detail:
 
 account_address_add:
     path: /account/address
-    methods: ['GET']
+    methods: ['GET', 'POST']
     controller: UI\Actions\Account\AddAddressAction
 
 account_address_update:
     path: /account/address/{id}
     methods: ['GET', 'POST']
     controller: UI\Actions\Account\UpdateAddressAction
-
-account_offer_add:
-    path: /account/offer
-    controller: UI\Actions\Account\AddOfferAction
 
 account_address_delete:
     path: /account/address/delete/{id}
@@ -47,3 +43,11 @@ account_address_delete:
 offer_show:
     path: /offer/{id}
     controller: UI\Actions\Offer\ShowAction
+
+offer_add:
+    path: /offer
+    controller: UI\Actions\Offer\AddOfferAction
+
+offer_update:
+    path: /offer/update/{id}
+    controller: UI\Actions\Offer\UpdateOfferAction

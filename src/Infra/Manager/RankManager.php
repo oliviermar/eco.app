@@ -12,11 +12,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class RankManager implements RankManagerInterface
 {
+    /** @var RankRepositoryInterface */
+    private $rankRepository;
+
+    /**
+     * @param RankRepositoryInterface $rankRepository
+     */
+    public function __construct(RankrepositoryInterface $rankRepository)
+    {
+        $this->rankRepository = $rankRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getRank(UserInterface $user)
     {
-        throw new \Exception('Should be implement');
+        return $this->rankRepository->getByScore($user->getScore());
     }
 }

@@ -18,6 +18,14 @@ class Tag
     private $name;
 
     /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
+    /**
      * @param UuidInterface $uuid
      * @param string        $name
      */

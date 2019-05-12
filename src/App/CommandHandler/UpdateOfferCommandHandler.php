@@ -2,32 +2,31 @@
 
 namespace App\CommandHandler;
 
-use App\Command\AddOfferCommand;
-use Domain\Entity\Offer;
-use Domain\Manager\TagManagerInterface;
-use Domain\Exception\InvalidEntityException;
-use Domain\Repository\OfferRepositoryInterface;
-use Domain\Repository\AddressRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Domain\Repository\OfferRepositoryInterface;
+use Domain\Repository\AddressRepositoryInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Domain\Manager\TagManagerInterface;
+use App\Command\UpdateOfferCommand;
 use Domain\Uploader\FileUploaderInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class AddOfferCommandHandler
+ * Class UpdateOfferCommandHandler
  *
  * @author Olivier Maréchal <o.marechal@wakeonweb.com>
  */
-class AddOfferCommandHandler implements MessageHandlerInterface
+class UpdateOfferCommandHandler implements MessageHandlerInterface
 {
     /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    /** @var ValidatorInterface */
-    private $validator;
-
     /** @var OfferRepositoryInterface */
     private $offerRepository;
+
+    /** @var ValidatorInterface */
+    private $validator;
 
     /** @var AddressRepositoryInterface */
     private $addressRepository;
@@ -40,50 +39,56 @@ class AddOfferCommandHandler implements MessageHandlerInterface
 
     /**
      * @param TokenStorageInterface      $tokenStorage
-     * @param ValidatorInterface         $validator
      * @param OfferRepositoryInterface   $offerRepository
+     * @param ValidatorInterface         $validator
      * @param AddressRepositoryInterface $addressRepository
      * @param TagManagerInterface        $tagManager
      * @param FileUploaderInterface      $fileUploader
      */
-    public function __construct(TokenStorageInterface $tokenStorage, ValidatorInterface $validator, OfferRepositoryInterface $offerRepository, AddressRepositoryInterface $addressRepository, TagManagerInterface $tagManager, FileUploaderInterface $fileUploader)
+    public function __construct(TokenStorageInterface $tokenStorage, OfferRepositoryInterface $offerRepository, ValidatorInterface $validator, AddressRepositoryInterface $addressRepository, TagManagerInterface $tagManager, FileUploaderInterface $fileUploader)
     {
         $this->tokenStorage = $tokenStorage;
-        $this->validator = $validator;
         $this->offerRepository = $offerRepository;
+        $this->validator = $validator;
         $this->addressRepository = $addressRepository;
         $this->tagManager = $tagManager;
         $this->fileUploader = $fileUploader;
     }
 
     /**
-     * @param AddOfferCommand $command
+     * @param UpdateOfferCommand $command
      */
-    public function __invoke(AddOfferCommand $command)
+    public function __invoke(UpdateOfferCommand $command)
     {
         $user = $this->tokenStorage->getToken()->getUser();
+
         $address = $this->addressRepository->find($command->getAddressId());
         if (!$address) {
             throw new \Exception('L\'adresse doit faire partie de vos adresses pré-enregistrer');
         }
 
-        $offer = new Offer();
+        $offer = $this->offerRepository->findById($command->getId());
+        if (!$offer) {
+            throw new \Exception(
+                sprintf('L\'offre avec l\'identifiant "%s" n\'existe pas', $command->getId()));
+        }
+
         $offer
-            ->setId($command->getId())
             ->setAddress($address)
-            ->setUser($user)
             ->setTitle($command->getTitle())
             ->setDescription($command->getDescription())
             ->setPrice($command->getPrice())
             ->setQuantity($command->getQuantity());
 
-        if ($command->getImage()) {
-            $offer->setImage($this->fileUploader->upload($command->getImage()));
+        $tags = [];
+        foreach ($command->getTags() as $tagName) {
+            $tags[] = $this->tagManager->getOrCreate($tagName);
         }
 
-        foreach ($command->getTags() as $tagName) {
-            $tag = $this->tagManager->getOrCreate($tagName);
-            $offer->addTag($tag);
+        $offer->setTags($tags);
+
+        if ($command->getImage() instanceof UploadedFile) {
+            $offer->setImage($this->fileUploader->upload($command->getImage()));
         }
 
         $violations = $this->validator->validate($offer);

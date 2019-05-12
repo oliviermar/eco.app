@@ -64,4 +64,12 @@ class OfferRepository implements OfferRepositoryInterface
     {
         return $this->_em->getRepository(Offer::class)->findBy(['address' => $address]);
     }
+
+    /**
+     * @param Offer $offer
+     */
+    public function detach(Offer $offer)
+    {
+        $this->_em->detach($offer);
+    }
 }

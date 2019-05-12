@@ -3,11 +3,12 @@
 namespace UI\Actions\Account;
 
 use App\Command\AddAddressCommand;
-use Domain\Exeption\InvalidEntityException;
+use Domain\Exception\InvalidEntityException;
 use UI\Actions\BaseAction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Symfony\Component\Form\FormFactoryInterface;
+use UI\Form\AddressType;
 /**
  * Class AddAddressAction
  *
@@ -15,27 +16,35 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class AddAddressAction extends BaseAction
 {
-    public function __invoke(Request $request)
+    /**
+     * @param Request              $request
+     * @param FormFactoryInterface $formFactory
+     */
+    public function __invoke(Request $request, FormFactoryInterface $formFactory)
     {
-        if ($request->get('submitted')) {
+        $form = $formFactory->create(AddressType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $command = new AddAddressCommand(
-                $request->get('name'),
-                $request->get('street'),
-                $request->get('zipcode'),
-                $request->get('city'),
-                $request->get('streetNumber'),
-                $request->get('addressComplement')
+                $form->get('name')->getData(),
+                $form->get('street')->getData(),
+                $form->get('zipcode')->getData(),
+                $form->get('city')->getData(),
+                $form->get('streetNumber')->getData(),
+                $form->get('addressComplement')->getData()
             );
 
             try {
                 $this->bus->dispatch($command);
             } catch (InvalidEntityException $e) {
-                return $this->render('account/add_address.html.twig', ['error' => $e->getViolations()]);
+                return $this->render('account/update_address.html.twig', ['error' => $e->getViolations()]);
             }
 
             return $this->redirectToRoute('account_detail');
         }
 
-        return $this->render('account/add_address.html.twig');
+        return $this->render('account/update_address.html.twig', ['form' => $form->createView()]);
     }
 }

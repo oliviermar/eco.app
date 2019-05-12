@@ -38,7 +38,7 @@ class UpdateAddressCommandHandler
         $address = $this->addressRepository->find($command->getId());
 
         $address
-            ->rename($command->getName())
+            ->setName($command->getName())
             ->setStreet($command->getStreet())
             ->setZipcode($command->getZipcode())
             ->setCity($command->getCity())

@@ -2,18 +2,16 @@
 
 namespace App\Command;
 
-use Ramsey\Uuid\UuidInterface;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class AddOfferCommand
+ * Class UpdateOfferCommand
  *
  * @author Olivier Maréchal <o.marechal@wakeonweb.com>
  */
-class AddOfferCommand
+class UpdateOfferCommand
 {
-    /** @var UuidInterface */
+    /** @var string */
     private $id;
 
     /** @var string */
@@ -31,24 +29,25 @@ class AddOfferCommand
     /** @var array */
     private $tags;
 
-    /** @var UuidInterface */
+    /** @var string */
     private $addressId;
 
     /** @var UploadedFile */
     private $image;
 
     /**
-     * @param string        $title
-     * @param string        $description
-     * @param string        $quantity
-     * @param float         $price
-     * @param UuidInterface $addressId
-     * @param UploadedFile  $image
-     * @param array|null    $tags
+     * @param string       $id
+     * @param string       $title
+     * @param string       $description
+     * @param string       $quantity
+     * @param float        $price
+     * @param string       $addressId
+     * @param UploadedFile $image
+     * @param array|null   $tags
      */
-    public function __construct(string $title, string $description, string $quantity, float $price, UuidInterface $addressId, UploadedFile $image = null,  array $tags = [])
+    public function __construct(string $id, string $title, string $description, string $quantity, float $price, string $addressId, UploadedFile $image = null, array $tags = [])
     {
-        $this->id = Uuid::uuid4();
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->quantity = $quantity;
@@ -59,9 +58,9 @@ class AddOfferCommand
     }
 
     /**
-     * @return UuidInterface
+     * @return string
      */
-    public function getId(): UuidInterface
+    public function getId(): string
     {
         return $this->id;
     }
@@ -107,18 +106,18 @@ class AddOfferCommand
     }
 
     /**
+     * @return string
+     */
+    public function getAddressId(): string
+    {
+        return $this->addressId;
+    }
+
+    /**
      * @return UploadedFile
      */
     public function getImage(): ?UploadedFile
     {
         return $this->image;
-    }
-
-    /**
-     * @return UuidInterface
-     */
-    public function getAddressId(): UuidInterface
-    {
-        return $this->addressId;
     }
 }

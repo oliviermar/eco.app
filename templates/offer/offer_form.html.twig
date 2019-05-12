@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="head">
+            <div class="container">
+                {% if offer is defined %}
+                <h1>Modifier votre offre <i>{{ offer.title }}</i></h1>
+                {% else %}
+                    <h1>Nouvelle offre</h1>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container inner">
+            <div class="jumbotron text-center">
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.description) }}
+                        {{ form_widget(form.description) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.quantity) }}
+                        {{ form_widget(form.quantity) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.address) }}
+                        {{ form_widget(form.address) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.price) }}
+                        {{ form_widget(form.price) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.tags) }}
+                        {{ form_widget(form.tags) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.image) }}
+                        {{ form_widget(form.image) }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Valider</button>
+                    <a href="{{ path("dashboard") }}" class="btn btn-info btn-block">Annulé</a>
+                {{form_end(form)}}
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -36,25 +36,11 @@ class Address
     private $user;
 
     /**
-     * @param UuidInterface $uuid
-     * @param User          $user
-     * @param string        $name
-     * @param string        $street
-     * @param string        $zipcode
-     * @param string        $city
-     * @param string|null   $streetNumber
-     * @param string|null   $addressComplement
+     * @return string
      */
-    public function __construct(UuidInterface $uuid, User $user, string $name, string $street, string $zipcode, string $city, ?string $streetNumber = null, ?string $addressComplement = null)
+    public function __toString(): string
     {
-        $this->id = $uuid;
-        $this->user = $user;
-        $this->name = $name;
-        $this->street = $street;
-        $this->zipcode = $zipcode;
-        $this->city = $city;
-        $this->streetNumber = $streetNumber;
-        $this->addressComplement = $addressComplement;
+        return $this->name;
     }
 
     /**
@@ -66,6 +52,17 @@ class Address
     }
 
     /**
+     * @param UuidInterface $id
+     *
+     * @return self
+     */
+    public function setId(UuidInterface $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+    /**
      * @return User
      */
     public function getUser(): User
@@ -74,9 +71,21 @@ class Address
     }
 
     /**
+     * @param User $user
+     *
+     * @return self
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -84,7 +93,7 @@ class Address
     /**
      * @return string
      */
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -92,7 +101,7 @@ class Address
     /**
      * @return string
      */
-    public function getZipcode(): string
+    public function getZipcode(): ?string
     {
         return $this->zipcode;
     }
@@ -100,7 +109,7 @@ class Address
     /**
      * @return string
      */
-     public function getCity(): string
+     public function getCity(): ?string
     {
         return $this->city;
     }
@@ -122,23 +131,11 @@ class Address
     }
 
     /**
-     * @param User $user
-     *
-     * @return self
-     */
-    public function setUser(User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
      * @param string $name
      *
      * @return self
      */
-    public function rename(string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -162,7 +159,7 @@ class Address
      *
      * @return self
      */
-    public function setZipCode(string $zipcode): self
+    public function setZipcode(string $zipcode): self
     {
         $this->zipcode = $zipcode;
 

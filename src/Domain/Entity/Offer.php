@@ -46,25 +46,17 @@ class Offer
     /** @var DateTime */
     private $createdAt;
 
+    /** @var float */
+    private $price;
+
+    /** @var string */
+    private $image;
+
     /**
      * Offer constructor
-     *
-     * @param UuidInterface $uuid
-     * @param Address       $address
-     * @param User          $user
-     * @param string        $title
-     * @param string        $description
-     * @param string        $quantity
-     * @param array|null    $tags
      */
-    public function __construct(UuidInterface $uuid, Address $address, User $user, string $title, string $description, ?string $quantity = null)
+    public function __construct()
     {
-        $this->id = $uuid;
-        $this->address = $address;
-        $this->user = $user;
-        $this->title = $title;
-        $this->description = $description;
-        $this->quantity = $quantity;
         $this->tags = new ArrayCollection();
         $this->status = self::STATUS_PUBLISH;
         $this->createdAt = new \DateTime();
@@ -79,9 +71,21 @@ class Offer
     }
 
     /**
+     * @param UuidInterface $id
+     *
+     * @return self
+     */
+    public function setId(UuidInterface $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * @return Address
      */
-    public function getAddress(): Address
+    public function getAddress(): ?Address
     {
         return $this->address;
     }
@@ -89,25 +93,61 @@ class Offer
     /**
      * @return User
      */
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
     /**
-     * @return string
+     * @param User $user
+     *
+     * @return self
      */
-    public function getTitle(): string
+    public function setUser(User $user): self
     {
-        return $this->title;
+        $this->user = $user;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return self
+     */
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): ?string
     {
         return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return self
+     */
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -119,11 +159,56 @@ class Offer
     }
 
     /**
+     * @param string $quantity
+     *
+     * @return self
+     */
+    public function setQuantity(string $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     *
+     * @return self
+     */
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
      * @return array
      */
     public function getTags(): \Traversable
     {
         return $this->tags;
+    }
+
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
     }
 
     /**
@@ -166,6 +251,26 @@ class Offer
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     *
+     * @return self
+     */
+    public function setImage($image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

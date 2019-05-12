@@ -31,6 +31,9 @@ class User implements UserInterface
     /** @var Offer[] */
     private $offers;
 
+    /** @var int */
+    private $score = 1;
+
     /**
      * @param UuidInterface $uuid
      * @param string        $username
@@ -134,8 +137,19 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Offer[]
+     */
     public function getOffers(): \Traversable
     {
         return $this->offers;
+    }
+
+    /**
+     * @return int
+     */
+    public function getScore(): int
+    {
+        return $this->score;
     }
 }

@@ -2,21 +2,19 @@
 
 {% block body %}
     <section>
-        <h2>Les dernières offres</h2>
-        <div>
-            {% for offer in last_offers %}
-                {{offer.title}}
-                <small>
-                    {% if offer.description|length > 50 %}
-                        {{offer.description|slice(0, 50)}}..
-                    {% else %}
-                        {{ offer.description }}
-                    {% endif %}
-                    <a href="{{ path('offer_show', {'id': offer.id}) }}">Details</a>
-                </small>
-            {% else %}
-                Pas d'offre en cours
-            {% endfor %}
+        <img src="{{ asset('/build/header.jpg') }}" class="w-100"/>
+    </section>
+    <section>
+        <div class="head">
+            <div class="container">
+                <h1>En deux mots</h1>
+            </div>
+        </div>
+        <div class="container inner">
+            <h2>Recycling c'est quoi ?</h2>
+            <p>C'est écologique etc etc  ...</p>
+            <h2>Recycling c'est pour qui ?</h2>
+            <p>C'est pour tout le monde ...</p>
         </div>
     </section>
 {% endblock %}

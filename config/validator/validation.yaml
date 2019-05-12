@@ -12,6 +12,24 @@ Domain\Entity\User:
             - NotBlank: 
                 message: Champs requis
 
+Domain\Entity\Offer:
+    properties:
+        title:
+            - NotBlank:
+                message: Champs requis
+        description:
+            - NotBlank:
+                message: Champs requis
+        quantity:
+            - NotBlank:
+                message: Champs requis
+        price:
+            - NotBlank:
+                message: Champs requis
+            - Type:
+                type: float
+                message: données invalide
+
 Domain\Entity\Address:
     properties:
         name:
@@ -23,9 +41,6 @@ Domain\Entity\Address:
         zipcode:
             - NotBlank:
                 message: Champs requis
-            - Type: 
-                type: integer
-                message: Code postal invalide
             - Length:
                 min: 5
                 max: 5

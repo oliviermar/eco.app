@@ -1,6 +1,6 @@
 <?php
 
-namespace UI\Actions\Account;
+namespace UI\Actions\Offer;
 
 use App\Command\AddOfferCommand;
 use Domain\Exeption\InvalidEntityException;
@@ -12,6 +12,8 @@ use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\Form\FormFactoryInterface;
+use UI\Form\OfferType;
 
 /**
  * Class AddOfferAction
@@ -23,16 +25,23 @@ class AddOfferAction extends BaseAction
     /** @var TokenStorageInterface */
     private $tokenStorage;
 
+    /** @var FormFactoryInterface */
+    private $formFactory;
+
     /**
-     * @param EngineInterface     $twig
-     * @param MessageBusInterface $bus
-     * @param RouterInterface     $router
+     * @param EngineInterface       $twig
+     * @param MessageBusInterface   $bus
+     * @param RouterInterface       $router
+     * @param TokenStorageInterface $tokenStorage
+     * @param FormFactoryInterface  $formFactory
      */
-    public function __construct(EngineInterface $twig, MessageBusInterface $bus, RouterInterface $router, TokenStorageInterface $tokenStorage)
+    public function __construct(EngineInterface $twig, MessageBusInterface $bus, RouterInterface $router, TokenStorageInterface $tokenStorage, FormFactoryInterface $formFactory)
     {
         parent::__construct($twig, $bus, $router);
         $this->tokenStorage = $tokenStorage;
+        $this->formFactory = $formFactory;
     }
+
     /**
      * @param Request $request
      *
@@ -40,26 +49,28 @@ class AddOfferAction extends BaseAction
      */
     public function __invoke(Request $request)
     {
+        $form = $this->formFactory->create(OfferType::class);
+        $form->handleRequest($request);
+
         $addresses = $this->tokenStorage->getToken()->getUser()->getAddresses();
 
-        if ($request->get('submitted')) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $command = new AddOfferCommand(
-                $request->get('title'),
-                $request->get('description'),
-                $request->get('quantity'),
-                Uuid::fromString($request->get('addressId')),
-                explode(' ', $request->get('tags', []))
+                $form->get('title')->getData(),
+                $form->get('description')->getData(),
+                $form->get('quantity')->getData(),
+                (float) $form->get('price')->getData(),
+                Uuid::fromString($form->get('address')->getData()->getId()),
+                $form->get('image')->getData(),
+                explode(' ', $form->get('tags')->getData())
             );
 
             try {
                 $this->bus->dispatch($command);
             } catch (InvalidEntityException $e) {
                 return $this->render(
-                    'account/add_offer.html.twig',
-                    [
-                        'error' => $e->getViolations(),
-                        'addresses' => $addresses,
-                    ]
+                    'offer/offer_form.html.twig',
+                    ['form' => $form->createView()]
                 );
             }
 
@@ -67,8 +78,8 @@ class AddOfferAction extends BaseAction
         }
 
         return $this->render(
-            'account/add_offer.html.twig',
-            ['addresses' => $addresses]
+            'offer/offer_form.html.twig',
+            ['form' => $form->createView()]
         );
 
     }
