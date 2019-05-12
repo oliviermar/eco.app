@@ -1,0 +1,18 @@
+<div class="card col-lg-4 col-md-6 col-sm-6 col-xs-12 pl-0 pr-0">
+    {% if offer.image %}
+        <img class="card-img-top" src="{{ asset('/uploads/offer/'~offer.image) }}" alt="{{ offer.title }}">
+    {% else %}
+        <img class="card-img-top" src="{{ asset('/build/default.jpg') }}" alt="{{ offer.title }}">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ offer.title }}</h5>
+        <p class="card-text">
+            {% if offer.description|length > 150 %}
+                {{offer.description|slice(0, 150)}}...
+            {% else %}
+                {{ offer.description }}
+            {% endif %}
+        </p>
+        <p>{{offer.price}}</p>
+    </div>
+</div>

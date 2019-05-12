@@ -117,6 +117,11 @@ section .head {
     color: #1abb9c;
 }
 
+button.search-header {
+    position: relative;
+    left: -2.5rem;
+}
+
 .error {
     width: 100%;
     margin-top: 0.25rem;

@@ -41,4 +41,9 @@ interface OfferRepositoryInterface
      * @param string $id
      */
     public function publish(string $id);
+
+    /**
+     * @param string $term
+     */
+    public function searchByTerm(string $term);
 }

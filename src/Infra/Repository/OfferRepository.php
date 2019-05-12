@@ -98,4 +98,25 @@ class OfferRepository implements OfferRepositoryInterface
     {
         $this->_em->detach($offer);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function searchByTerm(string $term)
+    {
+        $qb = $this->_em->getRepository(Offer::class)->createQueryBuilder('o');
+        $qb
+            ->join('o.tags', 't')
+            ->where($qb->expr()->eq('o.status', ':status'))
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('o.title', ':term'),
+                    $qb->expr()->like('t.name', ':term')
+                )
+            )
+            ->setParameter(':status', Offer::STATUS_PUBLISH)
+            ->setParameter(':term', '%'.$term.'%');
+
+        return $qb->getQuery()->getResult();
+    }
 }

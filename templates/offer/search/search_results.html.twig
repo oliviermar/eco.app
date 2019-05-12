@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="head">
+            <h1>Résultat de recherche</h1>
+        </div>
+        <div class="container inner">
+            {% for offer in offers %}
+                {% include 'offer/search/search_details.html.twig' with {'offer': offer} %}
+            {% else %}
+                <p>Pas de résultat pour la recherche <b>{{term}}</b></p>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

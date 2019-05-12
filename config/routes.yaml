@@ -40,6 +40,10 @@ account_address_delete:
     controller: UI\Actions\Account\DeleteAddressAction
 
 #offer
+offer_search:
+    path: /offer/search
+    controller: UI\Actions\Offer\SearchOfferAction
+
 offer_show:
     path: /offer/{id}
     controller: UI\Actions\Offer\ShowAction
@@ -59,3 +63,4 @@ offer_cancel:
 offer_publish:
     path: /offer/publish/{id}
     controller: UI\Actions\Offer\PublishOfferAction
+
