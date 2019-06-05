@@ -123,6 +123,9 @@
     "squizlabs/php_codesniffer": {
         "version": "2.9.2"
     },
+    "stripe/stripe-php": {
+        "version": "v6.34.6"
+    },
     "symfony/apache-pack": {
         "version": "1.0",
         "recipe": {

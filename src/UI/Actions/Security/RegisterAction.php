@@ -28,8 +28,7 @@ class RegisterAction extends BaseAction
             $command = new RegisterCommand(
                 $id,
                 $request->get('username', ''),
-                $request->get('password', ''),
-                $request->get('stripeId', null)
+                $request->get('password', '')
             );
             try {
                 $this->bus->dispatch($command);

@@ -20,20 +20,16 @@ class RegisterCommand
     /** @var string */
     private $password;
 
-    /** @var string|null */
-    private $stripeId;
-
     /**
      * @param UuidInterface $id
      * @param string        $username
      * @param string        $password
      */
-    public function __construct(UuidInterface $id, string $username, string $password, string $stripeId = null)
+    public function __construct(UuidInterface $id, string $username, string $password)
     {
         $this->id = $id;
         $this->username = $username;
         $this->password = $password;
-        $this->stripeId = $stripeId;
     }
 
     /**
@@ -58,13 +54,5 @@ class RegisterCommand
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStripeId(): ?string
-    {
-        return $this->stripeId;
     }
 }

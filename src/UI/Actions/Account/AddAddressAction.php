@@ -39,12 +39,12 @@ class AddAddressAction extends BaseAction
             try {
                 $this->bus->dispatch($command);
             } catch (InvalidEntityException $e) {
-                return $this->render('account/update_address.html.twig', ['error' => $e->getViolations()]);
+                return $this->render('address/address_form.html.twig', ['error' => $e->getViolations()]);
             }
 
             return $this->redirectToRoute('account_detail');
         }
 
-        return $this->render('account/update_address.html.twig', ['form' => $form->createView()]);
+        return $this->render('address/address_form.html.twig', ['form' => $form->createView()]);
     }
 }

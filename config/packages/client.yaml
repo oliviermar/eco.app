@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true 
+
+    Infra\Client\:
+        resource: '../../src/Infra/Client'
+
+    Infra\Client\StripeGateway:
+        arguments:
+            $secretApiKey: "%env(STRIPE_SECRET_API_KEY)%"
+            $publicApiKey: "%env(STRIPE_PUBLIC_API_KEY)%"
+
+    Domain\Client\StripeGatewayInterface: '@Infra\Client\StripeGateway'
+
